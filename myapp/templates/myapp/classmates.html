@@ -1,0 +1,64 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block title %}Образовательная программа{% endblock %}
+
+{% block content %}
+
+<h1 class="edu-prog">Образовательная программа</h1>
+
+
+<section class="section">
+<h2 class="section-title">{{ program.title }}</h2>
+<p class="program-description">
+{{ program.description }}
+</p>
+<div class="staff-grid">
+    <div class="profile-card">
+        <img src="{{ program.supervisor.photo }}" class="profile-photo">
+        <div class="profile-info">
+            <h3>Декан</h3>
+            <p>{{ program.supervisor.name }}</p>
+            <p>{{ program.supervisor.email }}</p>
+        </div>
+    </div>
+    <div class="profile-card">
+        <img src="{{ program.manager.photo }}" class="profile-photo">
+        <div class="profile-info">
+            <h3>Менеджер</h3>
+            <p>{{ program.manager.name }}</p>
+            <p>{{ program.manager.email }}</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Я</h2>
+<div class="profile-card main-profile">
+    <img src="{{ me.photo }}" class="profile-photo">
+    <div class="profile-info">
+        <h3>{{ me.name }}</h3>
+        <p>Email: {{ me.email }}</p>
+        <p>Телефон: {{ me.phone }}</p>
+    </div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Мои однокурсники</h2>
+<div class="students-grid">
+{% for student in students %}
+<div class="student-card">
+    <img src="{{ student.photo }}" class="student-photo">
+    <h3>{{ student.name }}</h3>
+    <p>{{ student.email }}</p>
+    <p>{{ student.phone }}</p>
+</div>
+{% endfor %}
+</div>
+</section>
+
+
+
+{% endblock %}

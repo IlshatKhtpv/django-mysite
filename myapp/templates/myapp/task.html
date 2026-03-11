@@ -1,0 +1,43 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block title %}Задача{% endblock %}
+
+{% block content %}
+<h1 class="task-title">Алгоритмическая задача №1007</h1>
+
+<div class="task-description">
+    <p>Имеются две ёмкости: кубическая с ребром A, цилиндрическая с высотой H и радиусом основания R.</p>
+    <p>Определить, поместится ли жидкость объёма M в первую ёмкость, во вторую, в обе.</p>
+    <p>Для проверки выполнения условий введите параметры А, H, R, M в соответствующие поля в м<sup>3</sup>.</p>
+    <p>Вводить можно как целые значения, так и числа с плавающей запятой.</p>
+</div>
+
+<div class="task-layout">
+    <div class="task-form">
+        <form method="post">
+            {% csrf_token %}
+            <label>Ребро куба A:</label>
+            <input type="number" step="any" name="A" required><br><br>
+
+            <label>Высота цилиндра H:</label>
+            <input type="number" step="any" name="H" required><br><br>
+
+            <label>Радиус основания R:</label>
+            <input type="number" step="any" name="R" required><br><br>
+
+            <label>Объём жидкости M:</label>
+            <input type="number" step="any" name="M" required><br><br>
+
+            <button type="submit">Проверить</button><br><br>
+        </form>
+    </div>
+</div>
+
+{% if result %}
+<div class="result">
+    <b>Результат:</b> {{ result }}
+</div>
+{% endif %}
+<br>
+{% endblock %}

@@ -1,0 +1,295 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+p { font-size: 17px; }
+
+/* Боковая панель навигации */
+
+/* скрытый чекбокс */
+#nav-toggle {
+    display: none;
+}
+
+/* кнопка */
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 1100;
+    background: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100vh;
+    background: #1f2937;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: left 0.3s ease;
+    z-index: 1200;
+}
+
+.sidebar-header {
+    margin-bottom: 30px;
+}
+
+.nav-links a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+/* overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+/* основной контент */
+.content {
+    padding: 60px 30px;
+    transition: margin-left 0.3s ease;
+}
+
+/* ===== Когда меню открыто ===== */
+
+#nav-toggle:checked ~ .sidebar {
+    left: 0;
+}
+
+#nav-toggle:checked ~ .overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 👇 ВАЖНО: сдвигаем контент */
+#nav-toggle:checked ~ .content {
+    margin-left: 250px;
+}
+/* ===== Layout ===== */
+
+.page-wrapper {
+    padding-top: 80px; /* чтобы не залезало под кнопку */
+    transition: margin-left 0.3s ease;
+}
+
+/* Центрирование контента */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Когда меню открыто — сдвигаем всё */
+#nav-toggle:checked ~ .page-wrapper {
+    margin-left: 250px;
+}
+
+/* Основная страница */
+
+.image-qubit {
+    display: flex;
+    justify-content: center;
+}
+
+.image-ibmq {
+    display: block;
+    justify-content: center;
+    text-align: center;
+}
+
+.image-ibmq figcaption {
+    font-size: 14px;
+    color: gray;
+    margin-top: 5px;
+}
+
+.image-qcomp {
+    display: flex;
+    justify-content: center;
+}
+
+.first-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.first-title h1 {
+    font-size: 34px;
+    border-bottom: 3px solid #3a7afe;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.fact-card {
+    background: #f4f7ff;
+    border-left: 5px solid #3a7afe;
+    padding: 18px 20px;
+    margin: 25px 0;
+    border-radius: 8px;
+}
+
+.fact-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2a4dbf;
+    font-size: 18px;
+}
+
+
+/* Алгоритмическая задача */
+
+.task-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3a7afe;
+    display: block;
+}
+
+.task-description {
+    background: #f5f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.task-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.task-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+.task-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.task-form input {
+    width: 100%;
+    padding: 7px;
+    margin-top: 4px;
+}
+
+.task-form button {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    background: #3a7afe;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 18px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    font-size: 17px;
+    text-align: center;
+}
+
+
+/* Образовательная программа */
+
+.edu-prog {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3a7afe;
+    display: block;
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    border-bottom: 3px solid #3a7afe;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info h3 {
+    margin-top: 0;
+}
+
+.program-description {
+    margin-bottom: 25px;
+    max-width: 700px;
+}
+
+.staff-grid {
+    display: flex;
+    gap: 25px;
+}
+
+.students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.student-card {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.student-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
