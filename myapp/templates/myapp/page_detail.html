@@ -1,0 +1,11 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+<h1 class="edu-prog">{{ page.title }}</h1>
+
+<section class="section">
+    {{ page.content|safe }}
+</section>
+{% endblock %}

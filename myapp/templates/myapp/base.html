@@ -19,11 +19,14 @@
     <div class="sidebar-header">
         <h2>MyApp</h2>
     </div>
+    {% load navigation %}
     <nav class="nav-links">
         <a href="{% url 'home' %}">Главная</a>
         <a href="{% url 'task' %}">Задача</a>
         <a href="{% url 'classmates' %}">Образовательная программа</a>
-        <a href="https://github.com/IlshatKhtpv">GitHub</a>
+        <a href ="{% url 'reviews' %}">Лист отзывов</a>
+        {% show_nav_pages %}
+        <a href="https://github.com/IlshatKhtpv/django-mysite">GitHub</a>
     </nav>
 </aside>
 

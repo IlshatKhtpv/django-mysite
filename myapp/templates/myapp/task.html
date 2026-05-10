@@ -40,4 +40,54 @@
 </div>
 {% endif %}
 <br>
+
+{% if history %}
+<section class="section">
+    <h2 class="section-title">История вычислений</h2>
+
+    <form method="get" class="filter-form">
+        <label>Сортировка:</label>
+        <select name="sort">
+            <option value="-created_at" {% if request.GET.sort == '-created_at' %}selected{% endif %}>Новые сначала</option>
+            <option value="created_at" {% if request.GET.sort == 'created_at' %}selected{% endif %}>Старые сначала</option>
+        </select>
+        <button type="submit">Применить</button>
+        <a href="{% url 'task' %}">Сбросить</a>
+    </form>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>A</th>
+                <th>H</th>
+                <th>R</th>
+                <th>M</th>
+                <th>Результат</th>
+                <th>Дата</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in history %}
+            <tr>
+                <td>{{ item.input_a }}</td>
+                <td>{{ item.input_h }}</td>
+                <td>{{ item.input_r }}</td>
+                <td>{{ item.input_m }}</td>
+                <td>{{ item.result_text }}</td>
+                <td>{{ item.created_at|date:"d.m.Y H:i" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+
+{% endif %}
+
+
+
+
+
+
+
 {% endblock %}

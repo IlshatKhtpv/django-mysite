@@ -1,0 +1,86 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block title %}Отзывы-таблица{% endblock %}
+
+{% block content %}
+<h1 class="edu-prog">Отзывы об образовательной программе</h1>
+
+<!-- Статистика -->
+<section class="section">
+    <h2 class="section-title">Статистика</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span>Всего отзывов</span>
+            <strong>{{ stats.total }}</strong>
+        </div>
+        <div class="stat-card">
+            <span>Средняя оценка</span>
+            <strong>{{ stats.avg_rating|floatformat:1 }}</strong>
+        </div>
+        <div class="stat-card">
+            <span>Минимальная</span>
+            <strong>{{ stats.min_rating }}</strong>
+        </div>
+        <div class="stat-card">
+            <span>Максимальная</span>
+            <strong>{{ stats.max_rating }}</strong>
+        </div>
+    </div>
+</section>
+
+<!-- Фильтр и сортировка -->
+<section class="section">
+    <h2 class="section-title">Фильтры</h2>
+
+    <form method="get" class="filter-form">
+
+    <div class="filter-group">
+        <label>Оценка от:</label>
+        <input type="number" name="min_rating" min="1" max="10" value="{{ request.GET.min_rating }}">
+    </div>
+
+    <div class="filter-group">
+        <label>до:</label>
+        <input type="number" name="max_rating" min="1" max="10" value="{{ request.GET.max_rating }}">
+    </div>
+
+    <div class="filter-group">
+        <label>Сортировка:</label>
+        <select name="sort">
+            <option value="-created_date" {% if request.GET.sort == '-created_date' %}selected{% endif %}>Новые сначала</option>
+            <option value="created_date" {% if request.GET.sort == 'created_date' %}selected{% endif %}>Старые сначала</option>
+            <option value="-rating" {% if request.GET.sort == '-rating' %}selected{% endif %}>Оценка (высокие)</option>
+            <option value="rating" {% if request.GET.sort == 'rating' %}selected{% endif %}>Оценка (низкие)</option>
+        </select>
+    </div>
+
+    <button type="submit">Применить</button>
+    <a href="{% url 'reviews' %}">Сбросить</a>
+</form>
+</section>
+
+<!-- Таблица -->
+<section class="section">
+    <h2 class="section-title">Все отзывы</h2>
+    <div class="reviews-table">
+
+    <div class="reviews-header">
+        <div>Ник</div>
+        <div>Содержание</div>
+        <div>Оценка</div>
+        <div>Дата</div>
+    </div>
+
+    {% for review in reviews %}
+    <div class="review-row">
+        <div>{{ review.nickname }}</div>
+        <div>{{ review.text }}</div>
+        <div>{{ review.rating }}/10</div>
+        <div>{{ review.created_date|date:"d.m.Y H:i" }}</div>
+    </div>
+    {% endfor %}
+
+</div>
+</section>
+{% endblock %}

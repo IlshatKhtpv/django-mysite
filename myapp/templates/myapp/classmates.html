@@ -9,56 +9,90 @@
 
 
 <section class="section">
-<h2 class="section-title">{{ program.title }}</h2>
-<p class="program-description">
-{{ program.description }}
-</p>
-<div class="staff-grid">
-    <div class="profile-card">
-        <img src="{{ program.supervisor.photo }}" class="profile-photo">
-        <div class="profile-info">
-            <h3>Декан</h3>
-            <p>{{ program.supervisor.name }}</p>
-            <p>{{ program.supervisor.email }}</p>
+    <h2 class="section-title">{{ program.title }}</h2>
+    <p class="program-description">
+        {{ program.description }}
+    </p>
+    <div class="staff-grid">
+        <div class="profile-card">
+            <img src="{{ program.supervisor_photo.url }}" class="profile-photo">
+            <div class="profile-info">
+                <h3>Декан</h3>
+                <p>{{ program.supervisor_name }}</p>
+                <p>{{ program.supervisor_email }}</p>
+            </div>
+        </div>
+        <div class="profile-card">
+            <img src="{{ program.manager_photo.url  }}" class="profile-photo">
+            <div class="profile-info">
+                <h3>Менеджер</h3>
+                <p>{{ program.manager_name }}</p>
+                <p>{{ program.manager_email }}</p>
+            </div>
         </div>
     </div>
-    <div class="profile-card">
-        <img src="{{ program.manager.photo }}" class="profile-photo">
-        <div class="profile-info">
-            <h3>Менеджер</h3>
-            <p>{{ program.manager.name }}</p>
-            <p>{{ program.manager.email }}</p>
-        </div>
-    </div>
-</div>
 </section>
 
 <section class="section">
-<h2 class="section-title">Я</h2>
-<div class="profile-card main-profile">
-    <img src="{{ me.photo }}" class="profile-photo">
-    <div class="profile-info">
-        <h3>{{ me.name }}</h3>
-        <p>Email: {{ me.email }}</p>
-        <p>Телефон: {{ me.phone }}</p>
+    <h2 class="section-title">Я</h2>
+    <div class="profile-card main-profile">
+        <img src="{{ me.photo.url  }}" class="profile-photo">
+        <div class="profile-info">
+            <h3>{{ me.name }}</h3>
+            <p>Email: {{ me.email }}</p>
+            <p>Телефон: {{ me.phone }}</p>
+        </div>
     </div>
-</div>
 </section>
 
 <section class="section">
-<h2 class="section-title">Мои однокурсники</h2>
-<div class="students-grid">
-{% for student in students %}
-<div class="student-card">
-    <img src="{{ student.photo }}" class="student-photo">
-    <h3>{{ student.name }}</h3>
-    <p>{{ student.email }}</p>
-    <p>{{ student.phone }}</p>
-</div>
-{% endfor %}
-</div>
+    <h2 class="section-title">Мои однокурсники</h2>
+    <div class="students-grid">
+        {% for student in students %}
+        <div class="student-card">
+            <img src="{{ student.photo.url  }}" class="student-photo">
+            <h3>{{ student.name }}</h3>
+            <p>{{ student.email }}</p>
+            <p>{{ student.phone }}</p>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 
+<section class="section">
+    <h2 class="section-title">Отзывы</h2>
+    {% for review in reviews %}
+    <div class="review-card">
+        <strong>{{ review.nickname }}</strong>
+        <span>Оценка: {{ review.rating }}/10</span>
+        <small>{{ review.created_at|date:"d.m.Y H:i" }}</small>
+        <p>{{ review.text }}</p>
+    </div>
+    {% endfor %}
 
+    <div class="review-form">
+    <h3>Оставить отзыв</h3>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Ник:</label>
+            <input type="text" name="nickname" required>
+        </div>
+
+        <div class="form-group">
+            <label>Отзыв:</label>
+            <textarea name="text" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Оценка (1-10):</label>
+            <input type="number" name="rating" min="1" max="10" required>
+        </div>
+
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+</section>
 
 {% endblock %}
